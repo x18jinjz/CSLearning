@@ -147,11 +147,27 @@ LinkedList 与 ArrayList 一样实现 List 接口，只是 ArrayList 是 List  �
 ### 属性
 
 ```java
-    private transient Entry<E> header = new Entry<E>(null, null, null);// 双端链表结点
-    private transient int size = 0;
+    //首节点
+    transient Node<E> first;
+    //尾节点
+    transient Node<E> last;
+    transient int size = 0;
 ```
 
 
 
-### 
+### 构造方法
 
+```
+public LinkedList() {
+    
+}
+
+//通过一个集合初始化LinkedList，元素顺序有这个集合的迭代器返回顺序决定
+public LinkedList(Collection<? extends E> c) {
+    this();
+    addAll(c);
+}
+```
+
+具体方法详见：https://blog.csdn.net/qq_19431333/article/details/54572876
