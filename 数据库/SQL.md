@@ -1,6 +1,5 @@
 Copy From ： https://github.com/CyC2018/Interview-Notebook/blob/master/notes/SQL.md
 
-```
 <!-- GFM-TOC -->
 * [一、基础](#一基础)
 * [二、创建表](#二创建表)
@@ -41,98 +40,98 @@ SQL 语句不区分大小写，但是数据库表名、列名和值是否区分�
 
 SQL 支持以下三种注释：
 
-​```sql
+```sql
 # 注释
 SELECT *
 FROM mytable; -- 注释
 /* 注释1
    注释2 */
-​```
+```
 
 数据库创建与使用：
 
-​```sql
+```sql
 CREATE DATABASE test;
 USE test;
-​```
+```
 
 # 二、创建表
 
-​```sql
+```sql
 CREATE TABLE mytable (
   id INT NOT NULL AUTO_INCREMENT,
   col1 INT NOT NULL DEFAULT 1,
   col2 VARCHAR(45) NULL,
   col3 DATE NULL,
   PRIMARY KEY (`id`));
-​```
+```
 
 # 三、修改表
 
 添加列
 
-​```sql
+```sql
 ALTER TABLE mytable
 ADD col CHAR(20);
-​```
+```
 
 删除列
 
-​```sql
+```sql
 ALTER TABLE mytable
 DROP COLUMN col;
-​```
+```
 
 删除表
 
-​```sql
+```sql
 DROP TABLE mytable;
-​```
+```
 
 # 四、插入
 
 普通插入
 
-​```sql
+```sql
 INSERT INTO mytable(col1, col2)
 VALUES(val1, val2);
-​```
+```
 
 插入检索出来的数据
 
-​```sql
+```sql
 INSERT INTO mytable1(col1, col2)
 SELECT col1, col2
 FROM mytable2;
-​```
+```
 
 将一个表的内容插入到一个新表
 
-​```sql
+```sql
 CREATE TABLE newtable AS
 SELECT * FROM mytable;
-​```
+```
 
 # 五、更新
 
-​```sql
+```sql
 UPDATE mytable
 SET col = val
 WHERE id = 1;
-​```
+```
 
 # 六、删除
 
-​```sql
+```sql
 DELETE FROM mytable
 WHERE id = 1;
-​```
+```
 
 **TRUNCATE TABLE**  可以清空表，也就是删除所有行。
 
-​```sql
+```sql
 TRUNCATE TABLE mytable;
-​```
+```
 
 使用更新和删除操作时一定要用 WHERE 子句，不然会把整张表的数据都破坏。可以先用 SELECT 语句进行测试，防止错误删除。
 
@@ -142,10 +141,10 @@ TRUNCATE TABLE mytable;
 
 相同值只会出现一次。它作用于所有列，也就是说所有列的值都相同才算相同。
 
-​```sql
+```sql
 SELECT DISTINCT col1, col2
 FROM mytable;
-​```
+```
 
 ## LIMIT
 
@@ -153,25 +152,25 @@ FROM mytable;
 
 返回前 5 行：
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 LIMIT 5;
-​```
+```
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 LIMIT 0, 5;
-​```
+```
 
 返回第 3 \~ 5 行：
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 LIMIT 2, 3;
-​```
+```
 
 
 # 八、排序
@@ -181,21 +180,21 @@ LIMIT 2, 3;
 
 可以按多个列进行排序，并且为每个列指定不同的排序方式：
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 ORDER BY col1 DESC, col2 ASC;
-​```
+```
 
 # 九、过滤
 
 不进行过滤的数据非常大，导致通过网络传输了多余的数据，从而浪费了网络带宽。因此尽量使用 SQL 语句来过滤不必要的数据，而不是传输所有的数据到客户端中然后由客户端进行过滤。
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 WHERE col IS NULL;
-​```
+```
 
 下表显示了 WHERE 子句可用的操作符
 
@@ -228,11 +227,11 @@ WHERE col IS NULL;
 
 使用 Like 来进行通配符匹配。
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 WHERE col LIKE '[^AB]%'; -- 不以 A 和 B 开头的任意文本
-​```
+```
 
 不要滥用通配符，通配符位于开头处匹配会非常慢。
 
@@ -242,17 +241,17 @@ WHERE col LIKE '[^AB]%'; -- 不以 A 和 B 开头的任意文本
 
 计算字段通常需要使用  **AS**  来取别名，否则输出的时候字段名为计算表达式。
 
-​```sql
+```sql
 SELECT col1 * col2 AS alias
 FROM mytable;
-​```
+```
 
 **CONCAT()**  用于连接两个字段。许多数据库会使用空格把一个值填充为列宽，因此连接的结果会出现一些不必要的空格，使用 **TRIM()** 可以去除首尾空格。
 
-​```sql
+```sql
 SELECT CONCAT(TRIM(col1), '(', TRIM(col2), ')') AS concat_col
 FROM mytable;
-​```
+```
 
 # 十二、函数
 
@@ -270,11 +269,11 @@ FROM mytable;
 
 其中， **SOUNDEX()**  可以将一个字符串转换为描述其语音表示的字母数字模式。
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 WHERE SOUNDEX(col1) = SOUNDEX('apple')
-​```
+```
 
 ## 日期和时间处理
 
@@ -301,13 +300,13 @@ WHERE SOUNDEX(col1) = SOUNDEX('apple')
 | `Time()` |返回一个日期时间的时间部分|
 | `Year()` |返回一个日期的年份部分|
 
-​```sql
+```sql
 mysql> SELECT NOW();
-​```
+```
 
-​```
+```
 2018-4-14 20:25:11
-​```
+```
 
 ## 数值处理
 
@@ -337,10 +336,10 @@ AVG() 会忽略 NULL 行。
 
 使用 DISTINCT 可以让汇总函数值汇总不同的值。
 
-​```sql
+```sql
 SELECT AVG(DISTINCT col1) AS avg_col
 FROM mytable
-​```
+```
 
 # 十三、分组
 
@@ -350,30 +349,30 @@ FROM mytable
 
 指定的分组字段除了能按该字段进行分组，也会自动按该字段进行排序。
 
-​```sql
+```sql
 SELECT col, COUNT(*) AS num
 FROM mytable
 GROUP BY col;
-​```
+```
 
 GROUP BY 自动按分组字段进行排序，ORDER BY 也可以按汇总字段来进行排序。
 
-​```sql
+```sql
 SELECT col, COUNT(*) AS num
 FROM mytable
 GROUP BY col
 ORDER BY num;
-​```
+```
 
 WHERE 过滤行，HAVING 过滤分组，行过滤应当先于分组过滤。
 
-​```sql
+```sql
 SELECT col, COUNT(*) AS num
 FROM mytable
 WHERE col > 2
 GROUP BY col
 HAVING num >= 2;
-​```
+```
 
 分组规定：
 
@@ -388,23 +387,23 @@ HAVING num >= 2;
 
 可以将子查询的结果作为 WHRER 语句的过滤条件：
 
-​```sql
+```sql
 SELECT *
 FROM mytable1
 WHERE col1 IN (SELECT col2
                FROM mytable2);
-​```
+```
 
 下面的语句可以检索出客户的订单数量，子查询语句会对第一个查询检索出的每个客户执行一次：
 
-​```sql
+```sql
 SELECT cust_name, (SELECT COUNT(*)
                    FROM Orders
                    WHERE Orders.cust_id = Customers.cust_id)
                    AS orders_num
 FROM Customers
 ORDER BY cust_name;
-​```
+```
 
 # 十五、连接
 
@@ -418,19 +417,19 @@ ORDER BY cust_name;
 
 内连接又称等值连接，使用 INNER JOIN 关键字。
 
-​```sql
+```sql
 SELECT a, b, c
 FROM A INNER JOIN B
 ON A.key = B.key;
-​```
+```
 
 可以不明确使用 INNER JOIN，而使用普通查询并在 WHERE 中将两个表中要连接的列用等值方法连接起来。
 
-​```sql
+```sql
 SELECT a, b, c
 FROM A, B
 WHERE A.key = B.key;
-​```
+```
 
 在没有条件语句的情况下返回笛卡尔积。
 
@@ -442,23 +441,23 @@ WHERE A.key = B.key;
 
 子查询版本
 
-​```sql
+```sql
 SELECT name
 FROM employee
 WHERE department = (
       SELECT department
       FROM employee
       WHERE name = "Jim");
-​```
+```
 
 自连接版本
 
-​```sql
+```sql
 SELECT e1.name
 FROM employee AS e1, employee AS e2
 WHERE e1.department = e2.department
       AND e2.name = "Jim";
-​```
+```
 
 连接一般比子查询的效率高。
 
@@ -468,10 +467,10 @@ WHERE e1.department = e2.department
 
 内连接和自然连接的区别：内连接提供连接的列，而自然连接自动连接所有同名列。
 
-​```sql
+```sql
 SELECT *
 FROM employee NATURAL JOIN department;
-​```
+```
 
 ## 外连接
 
@@ -479,21 +478,21 @@ FROM employee NATURAL JOIN department;
 
 检索所有顾客的订单信息，包括还没有订单信息的顾客。
 
-​```sql
+```sql
 SELECT Customers.cust_id, Orders.order_num
 FROM Customers LEFT OUTER JOIN Orders
 ON Customers.cust_id = Orders.cust_id;
-​```
+```
 
 如果需要统计顾客的订单数，使用聚集函数。
 
-​```sql
+```sql
 SELECT Customers.cust_id,
        COUNT(Orders.order_num) AS num_ord
 FROM Customers LEFT OUTER JOIN Orders
 ON Customers.cust_id = Orders.cust_id
 GROUP BY Customers.cust_id;
-​```
+```
 
 # 十六、组合查询
 
@@ -505,7 +504,7 @@ GROUP BY Customers.cust_id;
 
 只能包含一个 ORDER BY 子句，并且必须位于语句的最后。
 
-​```sql
+```sql
 SELECT col
 FROM mytable
 WHERE col = 1
@@ -513,7 +512,7 @@ UNION
 SELECT col
 FROM mytable
 WHERE col =2;
-​```
+```
 
 # 十七、视图
 
@@ -528,12 +527,12 @@ WHERE col =2;
 3. 通过只给用户访问视图的权限，保证数据的安全性；
 4. 更改数据格式和表示。
 
-​```sql
+```sql
 CREATE VIEW myview AS
 SELECT Concat(col1, col2) AS concat_col, col3*col4 AS compute_col
 FROM mytable
 WHERE col5 = val;
-​```
+```
 
 # 十八、存储过程
 
@@ -553,7 +552,7 @@ WHERE col5 = val;
 
 每次只能给一个变量赋值，不支持集合的操作。
 
-​```sql
+```sql
 delimiter //
 
 create procedure myprocedure( out ret int )
@@ -565,12 +564,12 @@ create procedure myprocedure( out ret int )
         select y*y into ret;
     end //
 delimiter ;
-​```
+```
 
-​```sql
+```sql
 call myprocedure(@ret);
 select @ret;
-​```
+```
 
 # 十九、游标
 
@@ -585,7 +584,7 @@ select @ret;
 3. 取出数据；
 4. 关闭游标；
 
-​```sql
+```sql
 delimiter //
 create procedure myprocedure(out ret int)
     begin
@@ -606,7 +605,7 @@ create procedure myprocedure(out ret int)
         close mycursor;
     end //
  delimiter ;
-​```
+```
 
 # 二十、触发器
 
@@ -616,12 +615,12 @@ create procedure myprocedure(out ret int)
 
 INSERT 触发器包含一个名为 NEW 的虚拟表。
 
-​```sql
+```sql
 CREATE TRIGGER mytrigger AFTER INSERT ON mytable
 FOR EACH ROW SELECT NEW.col into @result;
 
 SELECT @result; -- 获取结果
-​```
+```
 
 DELETE 触发器包含一个名为 OLD 的虚拟表，并且是只读的。
 
@@ -648,7 +647,7 @@ MySQL 的事务提交默认是隐式提交，每执行一条语句就把这条�
 
 如果没有设置保留点，ROLLBACK 会回退到 START TRANSACTION 语句处；如果设置了保留点，并且在 ROLLBACK 中指定该保留点，则会回退到该保留点。
 
-​```sql
+```sql
 START TRANSACTION
 // ...
 SAVEPOINT delete1
@@ -656,7 +655,7 @@ SAVEPOINT delete1
 ROLLBACK TO delete1
 // ...
 COMMIT
-​```
+```
 
 # 二十二、字符集
 
@@ -668,68 +667,68 @@ COMMIT
 
 除了给表指定字符集和校对外，也可以给列指定：
 
-​```sql
+```sql
 CREATE TABLE mytable
 (col VARCHAR(10) CHARACTER SET latin COLLATE latin1_general_ci )
 DEFAULT CHARACTER SET hebrew COLLATE hebrew_general_ci;
-​```
+```
 
 可以在排序、分组时指定校对：
 
-​```sql
+```sql
 SELECT *
 FROM mytable
 ORDER BY col COLLATE latin1_general_ci;
-​```
+```
 
 # 二十三、权限管理
 
 MySQL 的账户信息保存在 mysql 这个数据库中。
 
-​```sql
+```sql
 USE mysql;
 SELECT user FROM user;
-​```
+```
 
 **创建账户** 
 
-​```sql
+```sql
 CREATE USER myuser IDENTIFIED BY 'mypassword';
-​```
+```
 
 新创建的账户没有任何权限。
 
 **修改账户名** 
 
-​```sql
+```sql
 RENAME myuser TO newuser;
-​```
+```
 
 **删除账户** 
 
-​```sql
+```sql
 DROP USER myuser;
-​```
+```
 
 **查看权限** 
 
-​```sql
+```sql
 SHOW GRANTS FOR myuser;
-​```
+```
 
 **授予权限** 
 
-​```sql
+```sql
 GRANT SELECT, INSERT ON mydatabase.* TO myuser;
-​```
+```
 
 账户用 username@host 的形式定义，username@% 使用的是默认主机名。
 
 **删除权限** 
 
-​```sql
+```sql
 REVOKE SELECT, INSERT ON mydatabase.* FROM myuser;
-​```
+```
 
 GRANT 和 REVOKE 可在几个层次上控制访问权限：
 
@@ -743,11 +742,10 @@ GRANT 和 REVOKE 可在几个层次上控制访问权限：
 
 必须使用 Password() 函数
 
-​```sql
+```sql
 SET PASSWROD FOR myuser = Password('new_password');
-​```
+```
 
 # 参考资料
 
 - BenForta. SQL 必知必会 [M]. 人民邮电出版社, 2013.
-```
