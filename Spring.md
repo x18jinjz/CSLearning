@@ -178,7 +178,7 @@ IoC容器两种实现：`BeanFactory`（常称IoC容器） 和 `ApplicationConte
 
 ### 体系架构
 
-![1526976936064](https://github.com/x18jinjz/Interview/blob/master/image/526976936064.png)
+![1526976936064](https://github.com/x18jinjz/Interview/blob/master/image/1526976936064.png)
 
 ### DispatcherServlet
 
