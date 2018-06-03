@@ -1,6 +1,6 @@
 ## IOC & DI 
 
-![1526888208254](.\image\1526888208254.png)
+![1526888208254](https://github.com/x18jinjz/Interview/blob/master/image/1526888208254.png)
 
 IOC：控制反转，指某一接口具体实现类的选择控制权从调用类中移除，转交给第三方决定 
 
